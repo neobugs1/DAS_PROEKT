@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-12 d-flex justify-content-center mb-3">
                     <div class="justify-content-center mb-3" id="navbarSupportedContent">
-                        <button class="navbar-brand btn btn-outline-danger" type="submit">Додади осомничен</button>
+                        <!--                        <button class="navbar-brand btn btn-outline-danger" type="submit">Додади осомничен</button>-->
                     </div>
                 </div>
             </div>
@@ -55,7 +55,8 @@
         -->
 
         }
-        #pills-tab{
+
+        #pills-tab {
             width: 1245px;
         }
 
@@ -195,22 +196,46 @@
                     <div class="bg-dark p-4">
                         <ul class="nav nav-pills flex-column flex-sm-row nav-fill" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-sutka-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false" onclick="buttonOnClick(marker5)">Затвор Шутка</button>
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-sutka-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab"
+                                        aria-controls="pills-home" aria-selected="false"
+                                        onclick="buttonOnClick(marker5)">Затвор Шутка
+                                </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-idrizovo-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="buttonOnClick(marker1)">Казнено-поправен дом Идризово</button>
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-idrizovo-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab"
+                                        aria-controls="pills-profile" aria-selected="false"
+                                        onclick="buttonOnClick(marker1)">Казнено-поправен дом Идризово
+                                </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kumanovo-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="buttonOnClick(marker4)">Затвор Куманово</button>
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kumanovo-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab"
+                                        aria-controls="pills-contact" aria-selected="false"
+                                        onclick="buttonOnClick(marker4)">Затвор Куманово
+                                </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-sesti-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" onclick="buttonOnClick(marker6)">Шести</button>
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-sesti-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab"
+                                        aria-controls="pills-disabled" aria-selected="false"
+                                        onclick="buttonOnClick(marker6)">Шести
+                                </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kdp-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" onclick="buttonOnClick(marker3)">КДП Прилеп</button>
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kdp-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab"
+                                        aria-controls="pills-disabled" aria-selected="false"
+                                        onclick="buttonOnClick(marker3)">КДП Прилеп
+                                </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kule-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" onclick="buttonOnClick(marker2)">Зандан Куле</button>
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kule-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab"
+                                        aria-controls="pills-disabled" aria-selected="false"
+                                        onclick="buttonOnClick(marker2)">Зандан Куле
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -238,7 +263,8 @@
                     </ul>
                 </div>
             </div>
-            <img src="../static/images/potragi baner(1).png" th:src="@{images/potragi baner(1).png}" style="padding: 20px">
+            <img src="../static/images/potragi baner(1).png" th:src="@{images/potragi baner(1).png}"
+                 style="padding: 20px">
         </div>
         <!--        {% load static %}-->
 
@@ -249,62 +275,81 @@
                 </div>
                 <div class="bg-dark" style="width: 966px">
                     <div id="accordian " class="accordion container p-4">
-                        {% for suspect in suspects %}
-                        <div class="accordion-item" style="width: 100%">
-                            <div class="accordion-header baton">
-                                <button class="accordion-button collapsed" type="button"
-                                        style="background-color: #232f3e; color: white; opacity: 0.98"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapse{{suspect.suspect_id}}"
-                                        aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapse{{suspect.suspect_id}}">
-                                    #{{forloop.counter}} {{suspect.name}} {{suspect.lastname}}
-                                </button>
-                            </div>
-                            <!--                            <div  class="accordion-collapse collapse show">-->
-                            <div id="panelsStayOpen-collapse{{suspect.suspect_id}}"
-                                 class="accordion-collapse collapse item{{suspect.suspect_id}}"
-                                 data-bs-parent="#accordion"
-                                 aria-labelledby="panelsStayOpen-heading{{suspect.suspect_id}}">
-                                <div class="panel-body bio-graph-info" style="padding-left:10px">
-                                    <h3>Информации за осомничен:</h3>
-                                    <div class="row">
-                                        <div class="col-2">
-                                            <img src="{{ MEDIA_URL }}{{suspect.image.url}}" style="width:200px">
+<!--                        {% for suspect in suspects %}-->
+<!--                        <table>-->
+<!--                            <tbody th:each="prisoner : ${prisoners}" th:remove="tag">-->
+<!--                            <tr>-->
+<!--                                <td th:text="${prisoner.firstName}">...</td>-->
+<!--                                <td th:text="${prisoner.lastName}">...</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td colspan="2" th:text="${prisoner.age}">...</td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+                        <th:block th:each="prisoner : ${prisoners}">
+                            <div class="accordion-item" style="width: 100%">
+                                <div class="accordion-header baton">
+                                    <button class="accordion-button collapsed" type="button"
+                                            style="background-color: #232f3e; color: white; opacity: 0.98"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#panelsStayOpen-collapse{{suspect.suspect_id}}"
+                                            th:attr="data-bs-target='#panelsStayOpen-collapse'+ ${prisoner.id}"
+                                            aria-expanded="false"
+                                            aria-controls="panelsStayOpen-collapse{{suspect.suspect_id}}"
+                                            th:text = "'#'+${prisoner?.id}+' '+${prisoner?.firstName}+' '+${prisoner?.lastName}">
+<!--                                            th:text = "${prisoner?.lastName}">-->
+<!--                                        #{{forloop.counter}} {{suspect.name}} {{suspect.lastname}}-->
+
+                                    </button>
+                                </div>
+                                <!--                            <div  class="accordion-collapse collapse show">-->
+                                <div id="panelsStayOpen-collapse{{suspect.suspect_id}}"
+                                     th:attr="id='panelsStayOpen-collapse'+${prisoner.id}"
+                                     class="accordion-collapse collapse item{{suspect.suspect_id}}"
+                                     data-bs-parent="#accordion"
+                                     aria-labelledby="panelsStayOpen-heading{{suspect.suspect_id}}"
+                                     style="background: #232f3e; color: white">
+                                    <div class="panel-body bio-graph-info" style="padding-left:10px">
+                                        <h3>Информации за осомничен:</h3>
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png" style="width:200px">
+                                            </div>
+                                            <div class="offset-4 col-2" style="text-align: right;">
+                                                <p><b>First Name :</b></p>
+                                                <p><b>Last Name :</b></p>
+                                                <p><b>Age :</b></p>
+                                                <p><b>Gender :</b></p>
+                                                <p><b>Status :</b></p>
+                                                <p><b>Date :</b></p>
+                                                <p><b>Profession :</b></p>
+                                                <p><b>Education :</b></p>
+                                                <p><b>City :</b></p>
+                                            </div>
+                                            <div class="col-3" style="text-align: left">
+                                                <p th:text="${prisoner.firstName}">{{suspect.name}}</p>
+                                                <p th:text="${prisoner.lastName}">{{suspect.lastname}}</p>
+                                                <p th:text="${prisoner.age}">{{suspect.age}}</p>
+                                                <p th:text="${prisoner.gender}">{{suspect.gender}}</p>
+                                                <p th:text="${prisoner.status}">{{suspect.status}}</p>
+                                                <p th:text="${prisoner.datePrisoned}">{{suspect.date}}</p>
+                                                <p th:text="${prisoner.profession}">{{suspect.profession}}</p>
+                                                <p th:text="${prisoner.education}">{{suspect.education}}</p>
+                                                <p th:text="${prisoner.city}">{{suspect.city}}</p>
+                                            </div>
                                         </div>
-                                        <div class="offset-4 col-2" style="text-align: right;">
-                                            <p><b>First Name :</b></p>
-                                            <p><b>Last Name :</b></p>
-                                            <p><b>Age :</b></p>
-                                            <p><b>Gender :</b></p>
-                                            <p><b>Status :</b></p>
-                                            <p><b>Date :</b></p>
-                                            <p><b>Profession :</b></p>
-                                            <p><b>Education :</b></p>
-                                            <p><b>City :</b></p>
+                                        <div class="row">
+                                            <hr>
+                                            <h5>Опис на кривично дело</h5>
+                                            <p th:text="${prisoner.description}">{{suspect.desc}}</p>
                                         </div>
-                                        <div class="col-3" style="text-align: left">
-                                            <p>{{suspect.name}}</p>
-                                            <p>{{suspect.lastname}}</p>
-                                            <p>{{suspect.age}}</p>
-                                            <p>{{suspect.gender}}</p>
-                                            <p>{{suspect.status}}</p>
-                                            <p>{{suspect.date}}</p>
-                                            <p>{{suspect.profession}}</p>
-                                            <p>{{suspect.education}}</p>
-                                            <p>{{suspect.city}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <hr>
-                                        <h5>Опис на кривично дело</h5>
-                                        <p>{{suspect.desc}}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--                        <div style="height: 10px; width:50px"></div>-->
-                        {% endfor %}
+                            <!--                        <div style="height: 10px; width:50px"></div>-->
+<!--                            {% endfor %}-->
+                        </th:block>
                         </nav>
                     </div>
                 </div>
@@ -442,6 +487,7 @@
         });
         routingControl.addTo(map);
     }
+
     function buttonOnClick(e) {
         console.log(e)
         if (routingControl != null) {
