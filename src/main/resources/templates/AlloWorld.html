@@ -2,9 +2,459 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
     <title>Title</title>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-fixed-top bg-light navbar-light"
+         style="background-image: url('../static/images/editthisss.png'); background-repeat: no-repeat; background-size: cover; background-color: lightgray">
+        <div class="container d-flex justify-content-center">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center mb-3">
+                    <a class="navbar-brand" href="#"
+                    ><img
+                            id="PD-logo"
+                            src="../static/images/policija.png"
+                            alt="PD Logo"
+                            draggable="false"
+                            height="150"
+                            th:src="@{images/policija.png}"
+                    /></a>
+                </div>
+                <div class="col-12 d-flex justify-content-center mb-3">
+                    <div class="justify-content-center mb-3" id="navbarSupportedContent">
+                        <button class="navbar-brand btn btn-outline-danger" type="submit">Додади осомничен</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <style>
+
+        #map {
+            width: 100%;
+            height: 50vh;
+        }
+
+        .list-group {
+        <!-- width: 400 px !important;
+        -->
+
+        }
+        #pills-tab{
+            width: 1245px;
+        }
+
+        .list-group-item {
+            margin-top: 10px;
+            border-radius: none;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        .list-group-item:hover {
+            transform: scaleX(1.1);
+        }
+
+
+        .check {
+            opacity: 0;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .list-group-item:hover .check {
+            opacity: 1;
+
+        }
+
+        .about span {
+            font-size: 12px;
+            margin-right: 10px;
+
+        }
+
+        input[type=checkbox] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        input[type=checkbox]:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 0px;
+            left: 0;
+            border: 1px solid #10a3f9;
+            border-radius: 3px;
+            background-color: white;
+
+        }
+
+        input[type=checkbox]:checked:after {
+            content: "";
+            display: block;
+            width: 7px;
+            height: 12px;
+            border: solid #007bff;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            position: absolute;
+            top: 2px;
+            left: 6px;
+        }
+
+        input[type="checkbox"]:checked + .check {
+            opacity: 1;
+        }
+
+
+        .baton:hover {
+            background-color: black !important;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(154, 43, 23, .125);
+        }
+
+        .accordion-button:after {
+            background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+        }
+    </style>
 </head>
-<body>
-<p>Front end btw..</p>
+
+<body style="background-color: lightgray; background-image: url('../static/images/unknwn.png'); background-size: cover;">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #232f3e">
+    <!-- Container wrapper -->
+    <div class="container justify-content-center justify-content-md-between">
+        <!-- Left links -->
+        <ul class="navbar-nav flex-row">
+            <li class="nav-item me-2 me-lg-0">
+                <a class="nav-link" href="#">Сообраќај</a>
+            </li>
+            <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                <a class="nav-link" href="#">Јавен ред и мир</a>
+            </li>
+            <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                <a class="nav-link" href="#">Гранични премини</a>
+            </li>
+            <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                <a class="btn btn-outline-light" href="#">Криминалитет</a>
+            </li>
+            <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                <a class="nav-link" href="#">Архива</a>
+            </li>
+        </ul>
+        <!-- Left links -->
+
+        <button class="btn btn-outline-light btn-active" type="button">
+            Логин<i class=""></i>
+        </button>
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<div id="map"></div>
+
+<div style="padding: 10px">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="border:1px lightgray">
+            <nav class="navbar navbar-dark" style="background-color: #232f3e">
+                <div class="container-fluid">
+                    <h1 class="display-5 text-light ">Затвори</h1>
+                    <button class="navbar-toggler">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                </div>
+                <div class="">
+                    <div class="bg-dark p-4">
+                        <ul class="nav nav-pills flex-column flex-sm-row nav-fill" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-sutka-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false" onclick="buttonOnClick(marker5)">Затвор Шутка</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-idrizovo-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="buttonOnClick(marker1)">Казнено-поправен дом Идризово</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kumanovo-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="buttonOnClick(marker4)">Затвор Куманово</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-sesti-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" onclick="buttonOnClick(marker6)">Шести</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kdp-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" onclick="buttonOnClick(marker3)">КДП Прилеп</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="flex-sm-fill text-sm-center nav-link" id="pills-kule-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" onclick="buttonOnClick(marker2)">Зандан Куле</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div style="height: 10px"></div>
+        <div class="col-3" style="border:1px lightgray">
+
+            <nav class="navbar navbar-dark" style="background-color: #232f3e">
+                <div class="container-fluid">
+                    <h1 class="display-5 text-light ">Филтер</h1>
+                    <button class="navbar-toggler">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                </div>
+            </nav>
+            <div class="">
+                <div class="bg-dark p-4">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Исчезнати</li>
+                        <li class="list-group-item">Потраги</li>
+                        <li class="list-group-item">Затворени</li>
+                    </ul>
+                </div>
+            </div>
+            <img src="../static/images/potragi baner(1).png" th:src="@{images/potragi baner(1).png}" style="padding: 20px">
+        </div>
+        <!--        {% load static %}-->
+
+        <div class="col">
+            <div class="navbar navbar-dark" style="background-color: #232f3e">
+                <div class="container-fluid">
+                    <h1 class="display-5 text-light ">Осомничени</h1>
+                </div>
+                <div class="bg-dark" style="width: 966px">
+                    <div id="accordian " class="accordion container p-4">
+                        {% for suspect in suspects %}
+                        <div class="accordion-item" style="width: 100%">
+                            <div class="accordion-header baton">
+                                <button class="accordion-button collapsed" type="button"
+                                        style="background-color: #232f3e; color: white; opacity: 0.98"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapse{{suspect.suspect_id}}"
+                                        aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapse{{suspect.suspect_id}}">
+                                    #{{forloop.counter}} {{suspect.name}} {{suspect.lastname}}
+                                </button>
+                            </div>
+                            <!--                            <div  class="accordion-collapse collapse show">-->
+                            <div id="panelsStayOpen-collapse{{suspect.suspect_id}}"
+                                 class="accordion-collapse collapse item{{suspect.suspect_id}}"
+                                 data-bs-parent="#accordion"
+                                 aria-labelledby="panelsStayOpen-heading{{suspect.suspect_id}}">
+                                <div class="panel-body bio-graph-info" style="padding-left:10px">
+                                    <h3>Информации за осомничен:</h3>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <img src="{{ MEDIA_URL }}{{suspect.image.url}}" style="width:200px">
+                                        </div>
+                                        <div class="offset-4 col-2" style="text-align: right;">
+                                            <p><b>First Name :</b></p>
+                                            <p><b>Last Name :</b></p>
+                                            <p><b>Age :</b></p>
+                                            <p><b>Gender :</b></p>
+                                            <p><b>Status :</b></p>
+                                            <p><b>Date :</b></p>
+                                            <p><b>Profession :</b></p>
+                                            <p><b>Education :</b></p>
+                                            <p><b>City :</b></p>
+                                        </div>
+                                        <div class="col-3" style="text-align: left">
+                                            <p>{{suspect.name}}</p>
+                                            <p>{{suspect.lastname}}</p>
+                                            <p>{{suspect.age}}</p>
+                                            <p>{{suspect.gender}}</p>
+                                            <p>{{suspect.status}}</p>
+                                            <p>{{suspect.date}}</p>
+                                            <p>{{suspect.profession}}</p>
+                                            <p>{{suspect.education}}</p>
+                                            <p>{{suspect.city}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <hr>
+                                        <h5>Опис на кривично дело</h5>
+                                        <p>{{suspect.desc}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        <div style="height: 10px; width:50px"></div>-->
+                        {% endfor %}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding: 30px">
+        </div>
+    </div>
+</div>
+<div class="container-fluid navbar-fixed-bottom" style="background-color: #232f3e">
+    <div style="padding: 10px"></div>
+    <div class="row">
+        <div class="offset-2 col-2">
+            <h5 class="text-white"><b>МИНИСТЕРСТВО</b></h5>
+            <p><a href="#" class="link-secondary">> Министер</a></p>
+            <p><a href="#" class="link-secondary">> Заменик министер</a></p>
+            <p><a href="#" class="link-secondary">> Државен секретар</a></p>
+            <p><a href="#" class="link-secondary">> Биро за јавна безбедност</a></p>
+        </div>
+        <div class="col-2">
+            <h5 class="text-white"><b>АНАЛИЗИ И СТАТИСТИКИ</b></h5>
+            <p><a href="#" class="link-secondary">> Сообраќај</a></p>
+            <p><a href="#" class="link-secondary">> Јавен ред и мир</a></p>
+            <p><a href="#" class="link-secondary">> Гранични работи</a></p>
+            <p><a href="#" class="link-secondary">> Криминалитет</a></p>
+        </div>
+        <div class="col-2">
+            <h5 class="text-white"><b>ИНСТИТУЦИИ</b></h5>
+            <p><a href="#" class="link-secondary">Влада</a></p>
+            <p><a href="#" class="link-secondary">Претседател</a></p>
+            <p><a href="#" class="link-secondary">Собрание</a></p>
+            <p><a href="#" class="link-secondary">Јавно обвинителство</a></p>
+            <p><a href="#" class="link-secondary">Центар за обука</a></p>
+        </div>
+        <div class="col-2">
+            <h5 class="text-white"><b>ОСТАНАТИ ЛИНКОВИ</b></h5>
+            <p><a href="#" class="link-secondary">> Фото галерија</a></p>
+            <p><a href="#" class="link-secondary">> Видео галерија</a></p>
+            <p><a href="#" class="link-secondary">> Закажување со лични документи</a></p>
+            <p><a href="#" class="link-secondary">> CSCA-MK</a></p>
+            <p><a href="#" class="link-secondary">> Адреси и контакт телефони</a></p>
+            <p><a href="#" class="link-secondary">> Архива</a></p>
+            <p><a href="#" class="link-secondary">> FAQ</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    let mapOptions = {
+        center: [41.95713, 21.56485],
+        zoom: 10
+    }
+
+
+    let map = new L.map('map', mapOptions);
+
+    let layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    map.addLayer(layer);
+
+
+    if (!navigator.geolocation) {
+        console.log("Your browser doesn't support geolocation feature!")
+    } else {
+        // setInterval(() => {
+        navigator.geolocation.getCurrentPosition(getPosition);
+        // }, 100000);
+    }
+
+
+    let marker1 = new L.Marker([41.95713, 21.56485]);
+    marker1.addTo(map);
+
+    let marker2 = new L.Marker([41.02780295, 21.326481545840622]);
+    marker2.addTo(map);
+
+    let marker3 = new L.Marker([41.337038050000004, 21.513430241228882]);
+    marker3.addTo(map);
+
+    let marker4 = new L.Marker([42.02256105, 21.93355230183674]);
+    marker4.addTo(map);
+
+    let marker5 = new L.Marker([42.03133785, 21.424910872533413]);
+    marker5.addTo(map);
+
+    let marker6 = new L.Marker([41.6990113, 22.148784555553007]);
+    marker6.addTo(map);
+
+    var marker, circle, markerRoute;
+
+    function getPosition(position) {
+        // console.log(position)
+        var lat = position.coords.latitude
+        var long = position.coords.longitude
+        var accuracy = position.coords.accuracy
+
+        if (marker) {
+            map.removeLayer(marker)
+        }
+
+        if (circle) {
+            map.removeLayer(circle)
+        }
+
+        marker = L.marker([lat, long])
+        circle = L.circle([lat, long], {radius: accuracy})
+
+        var featureGroup = L.featureGroup([marker, circle]).addTo(map)
+
+        map.fitBounds(featureGroup.getBounds())
+
+        console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
+    }
+
+    marker1.on('click', markerOnClick);
+    marker2.on('click', markerOnClick);
+    marker3.on('click', markerOnClick);
+    marker4.on('click', markerOnClick);
+    marker5.on('click', markerOnClick);
+    marker6.on('click', markerOnClick);
+
+    var routingControl = null;
+
+    function markerOnClick(e) {
+        console.log(e)
+        // var newMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+        // map.removeControl(route)
+        if (routingControl != null) {
+            map.removeControl(routingControl);
+        }
+        routingControl = L.Routing.control({
+            waypoints: [
+                L.latLng(marker.getLatLng().lat, marker.getLatLng().lng),
+                L.latLng(e.latlng.lat, e.latlng.lng)
+            ]
+        });
+        routingControl.addTo(map);
+    }
+    function buttonOnClick(e) {
+        console.log(e)
+        if (routingControl != null) {
+            map.removeControl(routingControl);
+        }
+        routingControl = L.Routing.control({
+            waypoints: [
+                L.latLng(marker.getLatLng().lat, marker.getLatLng().lng),
+                L.latLng(e._latlng.lat, e._latlng.lng)
+            ]
+        });
+        routingControl.addTo(map);
+    }
+</script>
 </body>
 </html>
