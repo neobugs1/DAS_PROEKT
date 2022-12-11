@@ -152,3 +152,9 @@ JusticeIsServed е веб апликација која содржи база с
 
 
 ## Технички прототип
+
+### Видео:
+[![embed](https://user-images.githubusercontent.com/82407556/206928794-ab66cb90-c9fb-4c12-9b96-6b69e043bb7f.png)](https://youtu.be/jA7omAcKB-4 "Youtube Video")
+
+Кликнете на сликата или во случај тоа да не работи, линк: https://youtu.be/jA7omAcKB-4
+
