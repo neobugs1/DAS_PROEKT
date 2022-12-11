@@ -136,4 +136,19 @@ JusticeIsServed е веб апликација која содржи база с
 
 ## Mockup
 
+### Главната страна
+
+<img src="https://user-images.githubusercontent.com/82407556/206926463-1cecfca7-1865-414f-9821-12b924c4c0db.png" width="800" />
+
+### Логин формата
+
+<img src="https://user-images.githubusercontent.com/82407556/206926594-32e11108-079d-4284-9276-5aee23056b22.png" width="800" />
+
+### Форма за додавање нов осомничен
+
+<img src="https://user-images.githubusercontent.com/82407556/206926592-d969eb00-a3c3-4e1a-a8a4-55db940d2cee.png" width="800" />
+
+
+
+
 ## Технички прототип
