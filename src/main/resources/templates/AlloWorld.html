@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <!-- CSS only -->
@@ -169,10 +169,29 @@
             </li>
         </ul>
         <!-- Left links -->
+        <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="#" style="color: lightgray">
+                    <th:block th:if="${#request.getRemoteUser() != null}"
+                              th:text="'Логиран како: '+${#request.getRemoteUser()}"></th:block>
+                </a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="btn btn-outline-light btn-active" href="/logout">
+                    <i class="fa fa-shopping-cart"></i> Logout
+                </a>
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="btn btn-outline-light btn-active" href="/login">
+                    <i class="fa fa-shopping-cart"></i> Login
+                </a>
+            </li>
+        </ul>
+        <!--        <button class="btn btn-outline-light btn-active" type="button">-->
+        <!--            Логин<i class=""></i>-->
+        <!--        </button>-->
 
-        <button class="btn btn-outline-light btn-active" type="button">
-            Логин<i class=""></i>
-        </button>
+
     </div>
     <!-- Container wrapper -->
 </nav>
@@ -275,18 +294,18 @@
                 </div>
                 <div class="bg-dark" style="width: 966px">
                     <div id="accordian " class="accordion container p-4">
-<!--                        {% for suspect in suspects %}-->
-<!--                        <table>-->
-<!--                            <tbody th:each="prisoner : ${prisoners}" th:remove="tag">-->
-<!--                            <tr>-->
-<!--                                <td th:text="${prisoner.firstName}">...</td>-->
-<!--                                <td th:text="${prisoner.lastName}">...</td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td colspan="2" th:text="${prisoner.age}">...</td>-->
-<!--                            </tr>-->
-<!--                            </tbody>-->
-<!--                        </table>-->
+                        <!--                        {% for suspect in suspects %}-->
+                        <!--                        <table>-->
+                        <!--                            <tbody th:each="prisoner : ${prisoners}" th:remove="tag">-->
+                        <!--                            <tr>-->
+                        <!--                                <td th:text="${prisoner.firstName}">...</td>-->
+                        <!--                                <td th:text="${prisoner.lastName}">...</td>-->
+                        <!--                            </tr>-->
+                        <!--                            <tr>-->
+                        <!--                                <td colspan="2" th:text="${prisoner.age}">...</td>-->
+                        <!--                            </tr>-->
+                        <!--                            </tbody>-->
+                        <!--                        </table>-->
                         <th:block th:each="prisoner : ${prisoners}">
                             <div class="accordion-item" style="width: 100%">
                                 <div class="accordion-header baton">
@@ -297,9 +316,9 @@
                                             th:attr="data-bs-target='#panelsStayOpen-collapse'+ ${prisoner.id}"
                                             aria-expanded="false"
                                             aria-controls="panelsStayOpen-collapse{{suspect.suspect_id}}"
-                                            th:text = "'#'+${prisoner?.id}+' '+${prisoner?.firstName}+' '+${prisoner?.lastName}">
-<!--                                            th:text = "${prisoner?.lastName}">-->
-<!--                                        #{{forloop.counter}} {{suspect.name}} {{suspect.lastname}}-->
+                                            th:text="'#'+${prisoner?.id}+' '+${prisoner?.firstName}+' '+${prisoner?.lastName}">
+                                        <!--                                            th:text = "${prisoner?.lastName}">-->
+                                        <!--                                        #{{forloop.counter}} {{suspect.name}} {{suspect.lastname}}-->
 
                                     </button>
                                 </div>
@@ -314,7 +333,8 @@
                                         <h3>Информации за осомничен:</h3>
                                         <div class="row">
                                             <div class="col-2">
-                                                <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png" style="width:200px">
+                                                <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png"
+                                                     style="width:200px">
                                             </div>
                                             <div class="offset-4 col-2" style="text-align: right;">
                                                 <p><b>First Name :</b></p>
@@ -348,7 +368,7 @@
                                 </div>
                             </div>
                             <!--                        <div style="height: 10px; width:50px"></div>-->
-<!--                            {% endfor %}-->
+                            <!--                            {% endfor %}-->
                         </th:block>
                         </nav>
                     </div>

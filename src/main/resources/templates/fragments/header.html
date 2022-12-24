@@ -1,0 +1,193 @@
+<header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+                crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+              integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+                integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+        <title>Title</title>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-fixed-top bg-light navbar-light"
+             style="background-image: url('../static/images/editthisss.png'); background-repeat: no-repeat; background-size: cover; background-color: lightgray">
+            <div class="container d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center mb-3">
+                        <a class="navbar-brand" href="/"
+                        ><img
+                                id="PD-logo"
+                                src="../static/images/policija.png"
+                                alt="PD Logo"
+                                draggable="false"
+                                height="150"
+                                th:src="@{images/policija.png}"
+                        /></a>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center mb-3">
+                        <div class="justify-content-center mb-3" id="navbarSupportedContent">
+                            <!--                        <button class="navbar-brand btn btn-outline-danger" type="submit">Додади осомничен</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar -->
+        <style>
+
+            #map {
+                width: 100%;
+                height: 50vh;
+            }
+
+            .list-group {
+            <!-- width: 400 px !important;
+            -->
+
+            }
+
+            #pills-tab {
+                width: 1245px;
+            }
+
+            .list-group-item {
+                margin-top: 10px;
+                border-radius: none;
+                background: #ffffff;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+            }
+
+
+            .list-group-item:hover {
+                transform: scaleX(1.1);
+            }
+
+
+            .check {
+                opacity: 0;
+                transition: all 0.6s ease-in-out;
+            }
+
+            .list-group-item:hover .check {
+                opacity: 1;
+
+            }
+
+            .about span {
+                font-size: 12px;
+                margin-right: 10px;
+
+            }
+
+            input[type=checkbox] {
+                position: relative;
+                cursor: pointer;
+            }
+
+            input[type=checkbox]:before {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                top: 0px;
+                left: 0;
+                border: 1px solid #10a3f9;
+                border-radius: 3px;
+                background-color: white;
+
+            }
+
+            input[type=checkbox]:checked:after {
+                content: "";
+                display: block;
+                width: 7px;
+                height: 12px;
+                border: solid #007bff;
+                border-width: 0 2px 2px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                position: absolute;
+                top: 2px;
+                left: 6px;
+            }
+
+            input[type="checkbox"]:checked + .check {
+                opacity: 1;
+            }
+
+
+            .baton:hover {
+                background-color: black !important;
+            }
+
+            .accordion-button:focus {
+                box-shadow: none;
+                border-color: rgba(154, 43, 23, .125);
+            }
+
+            .accordion-button:after {
+                background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+            }
+        </style>
+    </head>
+
+    <body style="background-color: lightgray; background-image: url('../static/images/unknwn.png'); background-size: cover;">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #232f3e">
+        <!-- Container wrapper -->
+        <div class="container justify-content-center justify-content-md-between">
+            <!-- Left links -->
+            <ul class="navbar-nav flex-row">
+                <li class="nav-item me-2 me-lg-0">
+                    <a class="nav-link" href="#">Сообраќај</a>
+                </li>
+                <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                    <a class="nav-link" href="#">Јавен ред и мир</a>
+                </li>
+                <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                    <a class="nav-link" href="#">Гранични премини</a>
+                </li>
+                <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                    <a class="btn btn-outline-light" href="/">Криминалитет</a>
+                </li>
+                <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                    <a class="nav-link" href="#">Архива</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+
+            <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#" style="color: lightgray">
+                        <th:block th:if="${#request.getRemoteUser() != null}"
+                                  th:text="'Логиран како: '+${#request.getRemoteUser()}"></th:block>
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="btn btn-outline-light btn-active" href="/logout">
+                        <i class="fa fa-shopping-cart"></i> Logout
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-light btn-active" href="/login">
+                        <i class="fa fa-shopping-cart"></i> Login
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+</header>
