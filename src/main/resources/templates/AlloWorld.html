@@ -300,9 +300,9 @@
 <!--                    </ul>-->
 <!--                </div>-->
                 <div class="nav flex-column nav-pills bg-dark p-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Исчезнати</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button"  role="tab" aria-controls="v-pills-messages" aria-selected="false">Потраги</a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button"  role="tab" aria-controls="v-pills-zd" aria-selected="false">Затворени</a>
+                    <a class="nav-link fors" id="v-pills-home-tab" data-bs-toggle="" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false" onclick="filterOnClick('Исчезнат',this)">Исчезнати</a>
+                    <a class="nav-link fors" id="v-pills-messages-tab" data-bs-toggle="" data-bs-target="#pills-disabled" type="button"  role="tab" aria-controls="v-pills-messages" aria-selected="false" onclick="filterOnClick('Во потрага',this)">Потраги</a>
+                    <a class="nav-link fors" id="v-pills-settings-tab" data-bs-toggle="" data-bs-target="#pills-disabled" type="button"  role="tab" aria-controls="v-pills-zd" aria-selected="false" onclick="filterOnClick('Затвор',this)">Затворени</a>
                 </div>
             </div>
             <img src="../static/images/potragi baner(1).png" th:src="@{images/potragi baner(1).png}"
@@ -330,7 +330,7 @@
                         <!--                            </tbody>-->
                         <!--                        </table>-->
                         <th:block th:each="prisoner : ${prisoners}">
-                            <div class="accordion-item" style="width: 100%" th:prisonid="${prisoner.prison.id}">
+                            <div class="accordion-item" style="width: 100%" th:prisonid="${prisoner.prison.id}" th:status="${prisoner.status}">
                                 <div class="accordion-header baton">
                                     <button class="accordion-button collapsed" type="button"
                                             style="background-color: #232f3e; color: white; opacity: 0.98"
@@ -559,11 +559,32 @@
         Array.from($(".accordion-item")).map(li => {
             const matchFound = new RegExp(e).test(li.getAttribute('prisonid'));
             if(!matchFound){
-                li.classList.add('d-none');
+                li.classList.add('d-sm-none');
             }else{
-                li.classList.remove('d-none')
+                li.classList.remove('d-sm-none')
             }
         })
+    }
+    function filterOnClick(string,button) {
+        console.log(button.classList.contains('active'))
+        if(!button.classList.contains('active')) {
+            Array.from($(".accordion-item")).map(li => {
+                console.log(li.getAttribute('status'))
+                const matchFound = new RegExp(string).test(li.getAttribute('status'));
+                if (!matchFound) {
+                    li.classList.add('d-none');
+                } else {
+                    li.classList.remove('d-none')
+                }
+            })
+            $('.fors').removeClass("active");
+            button.classList.add("active");
+        }else{
+            Array.from($(".accordion-item")).map(li => {
+                li.classList.remove('d-none');
+            })
+            $('.fors').removeClass("active");
+        }
     }
 </script>
 </body>
