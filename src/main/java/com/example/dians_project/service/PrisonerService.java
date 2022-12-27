@@ -19,9 +19,10 @@ public interface PrisonerService {
 
     Optional<Prisoner> save(Long id, String lastName, String firstName, Integer age, String gender, String status, String description, LocalDateTime datePrisoned, String profession, String education, String city, Long prisonId);
 
+    Optional<Prisoner> save(String lastName, String firstName, Integer age, String gender, String status, String description, LocalDateTime datePrisoned, String profession, String education, String city, Long prisonId);
 //    Optional<Prisoner> save(ProductDto productDto);
 
-    Optional<Prisoner> edit(Long id, String name, Double price, Integer quantity, Long category, Long manufacturer);
+    Optional<Prisoner> edit(Long id, String lastName, String firstName, Integer age, String gender, String status, String description, LocalDateTime datePrisoned, String profession, String education, String city, Long prisonId);
 
 //    Optional<Prisoner> edit(Long id, ProductDto productDto);
 

@@ -1,0 +1,136 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+  <section class="jumbotron text-center bg-dark">
+    <div class="container bg-dark">
+      <h1 class="jumbotron-heading bg-dark" style="color: white">Додади Осомничен</h1>
+    </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <form action="/add" method="POST">
+          <input id="id" type="hidden" name="id" th:value="(${prisoner} != null ? ${prisoner.getId()} : '')">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text"
+                   class="form-control"
+                   id="firstName"
+                   name="firstName"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="Enter prisoner First Name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text"
+                   class="form-control"
+                   id="lastName"
+                   name="lastName"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="Enter prisoner Last Name">
+          </div>
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text"
+                   class="form-control"
+                   id="age"
+                   name="age"
+                   th:value="(${prisoner} != null ? ${prisoner.getQuantity()} : '')"
+                   placeholder="Age">
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <input type="text"
+                   class="form-control"
+                   id="gender"
+                   name="gender"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="Gender">
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text"
+                   class="form-control"
+                   id="status"
+                   name="status"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="Status">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text"
+                   class="form-control"
+                   id="description"
+                   name="description"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="Description">
+          </div>
+          <div class="form-group">
+            <label for="datePrisoned">Date of imprisonment</label>
+            <input type="datetime-local"
+                   class="form-control"
+                   id="datePrisoned"
+                   name="datePrisoned"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="Date">
+          </div>
+          <div class="form-group">
+            <label for="profession">Profession</label>
+            <input type="text"
+                   class="form-control"
+                   id="profession"
+                   name="profession"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="Profession">
+          </div>
+          <div class="form-group">
+            <label for="education">Education</label>
+            <input type="text"
+                   class="form-control"
+                   id="education"
+                   name="education"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="Level of education">
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text"
+                   class="form-control"
+                   id="city"
+                   name="city"
+                   th:value="(${prisoner} != null ? ${prisoner.getName()} : '')"
+                   required
+                   placeholder="City">
+          </div>
+
+          <div class="form-group">
+            <label>Prison</label>
+            <select name="prisonId" class="form-control">
+              <option th:if="${prisoner} != null"
+                      th:selected="${prisoner.getManufacturer() != null && prisoner.getManufacturer().getId() == man.getId()}"
+                      th:each="man : ${prison}"
+                      th:value="${man.getId()}"
+                      th:text="${man.getName()}">
+              </option>
+              <option th:if="${prisoner} == null"
+                      th:each="man : ${prisons}"
+                      th:value="${man.getId()}"
+                      th:text="${man.getName()}">
+              </option>
+            </select>
+          </div>
+          <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+          <a type="button" class="btn btn-primary" href="/">Back</a>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</th:block>

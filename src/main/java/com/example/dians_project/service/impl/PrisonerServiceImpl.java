@@ -52,9 +52,16 @@ public class PrisonerServiceImpl implements PrisonerService {
         this.prisonerRepository.deleteByFirstNameAndLastName(firstName,lastName);
         return Optional.of(this.prisonerRepository.save(new Prisoner(firstName, lastName, age, gender, status, description, datePrisoned, profession, education, city, prison)));
     }
+//TODO
+    @Override
+    public Optional<Prisoner> save(String lastName, String firstName, Integer age, String gender, String status, String description, LocalDateTime datePrisoned, String profession, String education, String city, Long prisonId) {
+        Prison prison = this.prisonRepository.findById(prisonId).orElseThrow(() -> new PrisonNotFoundException(prisonId));
+
+        return Optional.of(this.prisonerRepository.save(new Prisoner(firstName, lastName, age, gender, status, description, datePrisoned, profession, education, city, prison)));
+    }
 
     @Override
-    public Optional<Prisoner> edit(Long id, String name, Double price, Integer quantity, Long category, Long manufacturer) {
+    public Optional<Prisoner> edit(Long id, String lastName, String firstName, Integer age, String gender, String status, String description, LocalDateTime datePrisoned, String profession, String education, String city, Long prisonId) {
         return Optional.empty();
     }
 
