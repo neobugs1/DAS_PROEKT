@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Table(name = "prisoner")
 public class Prisoner {
     public Long getId() {
         return id;

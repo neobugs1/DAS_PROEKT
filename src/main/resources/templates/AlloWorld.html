@@ -292,12 +292,17 @@
                 </div>
             </nav>
             <div class="">
-                <div class="bg-dark p-4">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Исчезнати</li>
-                        <li class="list-group-item">Потраги</li>
-                        <li class="list-group-item">Затворени</li>
-                    </ul>
+<!--                <div class="bg-dark p-4">-->
+<!--                    <ul class="list-group list-group-flush">-->
+<!--                        <li class="list-group-item">Исчезнати</li>-->
+<!--                        <li class="list-group-item">Потраги</li>-->
+<!--                        <li class="list-group-item">Затворени</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+                <div class="nav flex-column nav-pills bg-dark p-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Исчезнати</a>
+                    <a class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button"  role="tab" aria-controls="v-pills-messages" aria-selected="false">Потраги</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button"  role="tab" aria-controls="v-pills-zd" aria-selected="false">Затворени</a>
                 </div>
             </div>
             <img src="../static/images/potragi baner(1).png" th:src="@{images/potragi baner(1).png}"
@@ -388,7 +393,14 @@
                             </div>
                             <!--                        <div style="height: 10px; width:50px"></div>-->
                             <!--                            {% endfor %}-->
+
                         </th:block>
+                        <div style="height: 10px;"></div>
+                        <div class="col-sm-12 col-md-12 text-center" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a href="/add-form" class="btn btn-block btn-danger add-product-btn ">
+                                Додади осомничен
+                            </a>
+                        </div>
                         </nav>
                     </div>
                 </div>
