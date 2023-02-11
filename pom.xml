@@ -79,6 +79,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>kiii-dians-docker</finalName>
     </build>
 
 </project>
